@@ -1,6 +1,7 @@
 package com.test.thread.Social91Thread;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
 
@@ -14,9 +15,11 @@ public class CycleCostCalculator implements Runnable {
 	
 	private static Logger logger = Logger.getLogger(App.class.getName());
 	private List<Cycle> cycleStockList;
+	private List<String> resultLst;
  
     public CycleCostCalculator( List<Cycle> cycleStockList) {
         this.cycleStockList = cycleStockList;
+        resultLst = new ArrayList<String>();
     }
 
 
@@ -36,7 +39,10 @@ public class CycleCostCalculator implements Runnable {
 				str = str + "	" + "Wheel Cost: "+ wheelCost;
 				str = str + "	" + "Seat Cost: "+ seatCost;
 				str = str + "	" + "Chain Cost: "+ chainCost;
-				App.addCyccleCostResult(str);
+				resultLst.add(str);
+			}
+			for(String result: resultLst) {
+				App.addCyccleCostResult(result);
 			}
 			App.flush();
 		} catch (Exception e) {
